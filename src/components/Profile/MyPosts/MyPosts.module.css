@@ -1,0 +1,12 @@
+.mypost strong {
+  margin-bottom: 10px;
+  display: block;
+}
+
+.mypost textarea {
+  width: 100%;
+}
+
+.posts {
+  margin-top: 20px;
+}

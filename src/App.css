@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+}
+.app-wrapper {
+  display: grid;
+  grid-template-areas: "header header" "nav content";
+  grid-template-rows: 70px 1fr;
+  grid-template-columns: 3fr 9fr;
+  grid-gap: 10px;
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.app-wrapper__content {
+  padding: 10px;
+  grid-area: content;
+  background-color: skyblue;
+}
+
+img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+}

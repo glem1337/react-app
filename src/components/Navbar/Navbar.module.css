@@ -1,0 +1,20 @@
+.nav {
+    padding: 10px;
+    grid-area: nav;
+    background-color: burlywood;
+}
+
+.item a {
+    color: #fff;
+}
+.item a.active {
+    color: yellow;
+}
+.item a:hover {
+    text-decoration: none;
+}
+
+.friends {
+    display: flex;
+    align-items: center;
+}

@@ -1,0 +1,19 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    grid-gap: 10px;
+}
+
+.messages {
+    border: 1px solid #fff;
+    padding: 15px;
+}
+
+.dialogs {
+    border: 1px solid #fff;
+    padding: 15px;
+}
+
+textarea {
+    width: 100%;
+}
