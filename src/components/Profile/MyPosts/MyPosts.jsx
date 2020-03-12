@@ -5,7 +5,7 @@ import Post from './Post/Post';
 
 const MyPosts = (props) => {
 
-    const postElements = props.state.posts
+    const postElements = props.profilePage.posts
         .map((post, index) => <Post key={index} likes={post.likes} text={post.text} />)
 
 
@@ -21,7 +21,7 @@ const MyPosts = (props) => {
     return (
         <div className={s.mypost}>
             <strong>My post</strong>
-            <textarea onChange={onChangeTextarea} value={props.state.newPostText} cols="30" rows="10" />
+            <textarea onChange={onChangeTextarea} value={props.profilePage.newPostText} cols="30" rows="10" />
             <button onClick={addPost} >add post</button>
             <div className={s.posts}>
                 {postElements}
