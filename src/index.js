@@ -7,7 +7,7 @@ import store from './redux/redux-store';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-let renderApp = (state) => {
+
     ReactDOM.render(
         <BrowserRouter>
             <Provider store={store}>
@@ -15,13 +15,6 @@ let renderApp = (state) => {
             </Provider>
         </BrowserRouter>,
         document.getElementById('root'));
-}
-
-renderApp(store.getState())
-
-store.subscribe(() => {
-    renderApp(store.getState())
-})
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

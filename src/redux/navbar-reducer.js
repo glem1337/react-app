@@ -2,6 +2,7 @@ const initialState = {
     nav: [
         { url: "profile", text: "Profile" },
         { url: "dialogs", text: "Dialogs" },
+        { url: "users", text: "Users" },
         { url: "news", text: "News" },
         { url: "music", text: "Music" },
         { url: "settings", text: "Settings" },

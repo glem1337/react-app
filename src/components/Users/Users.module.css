@@ -1,0 +1,17 @@
+.user {
+    display: flex;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #fff;
+}
+
+.user img {
+    width: 80px;
+    margin-right: 20px;
+}
+
+.userRight {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #fff;
+}
