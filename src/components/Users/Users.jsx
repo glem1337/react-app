@@ -7,20 +7,22 @@ import userPlaceholder from '../../assets/images/user.jpg'
 
 const Users = (props) => {
 
-    if (props.usersPage.users.length === 0) {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
-            .then(response => {
-                props.setUsers(response.data.items)
-            })
-
-        
+    let getUsers = (e) => {
+        if (props.usersPage.users.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users')
+                .then(response => {
+                    props.setUsers(response.data.items)
+                })
+            e.target.parentNode.removeChild(e.target)
+        }
     }
+
 
     const userElements = props.usersPage.users
         .map(user => {
             return <div className={s.user} key={user.id}>
                 <div className={s.userLeft}>
-                    <img src={user.photos.small != null ? user.photos.small : userPlaceholder } alt="" />
+                    <img src={user.photos.small != null ? user.photos.small : userPlaceholder} alt="" />
                     <div>{user.name}</div>
                     {user.followed ? <button onClick={() => props.unFollow(user.id)}>Unfollow</button> : <button onClick={() => props.follow(user.id)}>Follow</button>}
                 </div>
@@ -34,6 +36,7 @@ const Users = (props) => {
 
     return (
         <div>
+            <button onClick={getUsers}>get users</button>
             {userElements}
         </div>
     )
