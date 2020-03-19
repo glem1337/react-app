@@ -2,12 +2,12 @@
     margin-bottom: 15px;
 }
 
-a {
+.dialog a {
     color: #fff;
     display: flex;
     align-items: center;
 }
-a img {
+.dialog a img {
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -15,6 +15,6 @@ a img {
     margin-right: 10px;
 }
 
-a.active {
+.dialog a.active {
     color: gold;
 }

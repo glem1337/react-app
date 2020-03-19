@@ -9,6 +9,7 @@ import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import { Route } from 'react-router-dom';
+import ProfileContainer from './components/Profile/ProfileContainer';
 
 const App = (props) => {
   return (
@@ -16,8 +17,8 @@ const App = (props) => {
         <Header />
         <Navbar />
         <div className="app-wrapper__content">
-          <Route path="/" exact render={() => <Profile />} />
-          <Route path="/profile" render={() => <Profile />} />
+          <Route path="/" exact render={() => <ProfileContainer />} />
+          <Route path="/profile" render={() => <ProfileContainer />} />
           <Route path="/dialogs" render={() => <DialogsContainer />} />
           <Route path="/users" render={() => <UsersContainer />} />
           <Route path="/news" component={News} />
