@@ -48,7 +48,7 @@ class UsersContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
     ...state.usersPage
-})
+});
 
 const mapDispatchToProps = {
     follow,
