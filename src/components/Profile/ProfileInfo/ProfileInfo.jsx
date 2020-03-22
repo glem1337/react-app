@@ -24,7 +24,7 @@ const ProfileInfo = (props) => {
                     <div>About work: {props.profile.lookingForAJob && 'Ищу работу'}, {props.profile.lookingForAJobDescription}</div>
                     <div>Contacts:
                         {contacts.map(contact => {
-                        return <div>{contact.key}: <a href={`https://${contact.value}`}>{contact.value}</a></div>
+                        return <div key={contact.key}>{contact.key}: <a href={`https://${contact.value}`}>{contact.value}</a></div>
                     })}
                     </div>
                 </div>
