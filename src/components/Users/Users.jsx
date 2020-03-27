@@ -2,7 +2,6 @@ import React from 'react';
 import s from './Users.module.css'
 import userPlaceholder from '../../assets/images/user.jpg'
 import { NavLink } from 'react-router-dom';
-import { usersApi } from '../../api/api';
 
 
 
@@ -28,21 +27,11 @@ let Users = (props) => {
                             <div>{user.name}</div>
                             {
                                 user.followed ?
-                                    <button onClick={() => {
-                                        usersApi.unFollow(user.id)
-                                            .then(data => {
-                                                if (data.resultCode === 0) {
-                                                    props.unFollow(user.id)
-                                                }
-                                            })
+                                    <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
+                                        props.unfollowThunk(user.id);
                                     }}>Unfollow</button>
-                                    : <button onClick={() => {
-                                        usersApi.follow(user.id)
-                                            .then(data => {
-                                                if (data.resultCode === 0) {
-                                                    props.follow(user.id)
-                                                }
-                                            })
+                                    : <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
+                                        props.followThunk(user.id);
                                     }}>Follow</button>
                             }
                         </div>

@@ -33,3 +33,21 @@ export class usersApi {
 
 
 }
+
+export class authApi {
+
+    static me() {
+        return instance.get(`/auth/me`)
+            .then(response => {
+                return response.data;
+            });
+    }
+
+    static getProfile(userId) {
+        return instance.get(`/profile/${userId}`)
+            .then(response => {
+                return response.data;
+            });
+    }
+
+}

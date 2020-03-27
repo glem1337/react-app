@@ -1,3 +1,5 @@
+import { authApi } from '../api/api';
+
 const UPDATE_POST_TEXT = 'UPDATE_POST_TEXT';
 const ADD_POST = 'ADD_POST';
 const SET_PROFILE = 'SET_PROFILE';
@@ -38,5 +40,25 @@ const profileReducer = (state = initialState, action) => {
 export const updateNewPostText = (text) => ({ type: UPDATE_POST_TEXT, text: text });
 export const addPost = () => ({ type: ADD_POST });
 export const setProfile = profileData => ({ type: SET_PROFILE, profileData });
+
+
+export const setProfileThunk = (userId) => {
+    return dispatch => {
+        if (!userId) {
+            authApi.me()
+                .then(data => {
+                    authApi.getProfile(data.data.id)
+                        .then(data => {
+                            dispatch(setProfile(data));
+                        })
+                });
+        } else {
+            authApi.getProfile(userId)
+                .then(data => {
+                    dispatch(setProfile(data));
+                })
+        }
+    }
+};
 
 export default profileReducer;
