@@ -1,9 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import Users from './Users';
-import { getUsers, unfollowThunk, followThunk } from '../../redux/users-reducer';
+import {getUsers, unfollowThunk, followThunk} from '../../redux/users-reducer';
 import Preloader from '../common/Preloader/Preloader';
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 class UsersContainer extends React.Component {
 
@@ -27,9 +28,9 @@ class UsersContainer extends React.Component {
     render() {
         return <>
             {
-                this.props.isFetching ? <Preloader /> : undefined
+                this.props.isFetching ? <Preloader/> : undefined
             }
-            <Users {...this.props} pagination={this.pagination} setCurrentPage={this.setCurrentPage} />
+            <Users {...this.props} pagination={this.pagination} setCurrentPage={this.setCurrentPage}/>
         </>
     }
 
@@ -45,6 +46,4 @@ const mapDispatchToProps = {
     followThunk
 };
 
-let AuthRedirectComponent = withAuthRedirect(UsersContainer);
-
-export default connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
+export default compose(connect(mapStateToProps, mapDispatchToProps), withAuthRedirect)(UsersContainer);

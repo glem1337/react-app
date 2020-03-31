@@ -1,10 +1,11 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import Profile from './Profile';
-import { setProfileThunk } from '../../redux/profile-reducer';
+import {setProfileThunk} from '../../redux/profile-reducer';
 import Preloader from '../common/Preloader/Preloader';
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 class ProfileContainer extends React.Component {
 
@@ -16,9 +17,9 @@ class ProfileContainer extends React.Component {
 
     render() {
         {
-            if (!this.props.profile) return <Preloader />
+            if (!this.props.profile) return <Preloader/>
         }
-        return <Profile profile={this.props.profile} />
+        return <Profile profile={this.props.profile}/>
     }
 
 }
@@ -27,8 +28,5 @@ const mapStateToProps = (state) => ({
     profile: state.profilePage.profile
 });
 
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
 
-let WithRouterComponent = withRouter(AuthRedirectComponent);
-
-export default connect(mapStateToProps, { setProfileThunk })(WithRouterComponent);
+export default compose(connect(mapStateToProps, {setProfileThunk}), withAuthRedirect, withRouter)(ProfileContainer);
