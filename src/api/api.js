@@ -44,6 +44,24 @@ export class authApi {
     }
 
     static getProfile(userId) {
+        console.warn('Obsolete method. Please use profileApi.getProfile()');
+        return profileApi.getProfile(userId);
+    }
+
+}
+
+
+export class profileApi {
+
+    static updateStatus(status) {
+        return instance.put(`/profile/status`, {status: status})
+    }
+
+    static getStatus(userId) {
+        return instance.get(`/profile/status/${userId}`)
+    }
+
+    static getProfile(userId) {
         return instance.get(`/profile/${userId}`)
             .then(response => {
                 return response.data;

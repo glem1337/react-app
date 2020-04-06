@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
 import Placeholder from '../../../assets/images/user.jpg'
+import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
 const ProfileInfo = (props) => {
 
@@ -20,6 +21,7 @@ const ProfileInfo = (props) => {
                 </div>
                 <div className={s.descr}>
                     <strong>{props.profile.fullName}</strong>
+                    <ProfileStatus status={props.status} updateStatusThunk={props.updateStatusThunk} />
                     <div>About me: {props.profile.aboutMe}</div>
                     <div>About work: {props.profile.lookingForAJob && 'Ищу работу'}, {props.profile.lookingForAJobDescription}</div>
                     <div>Contacts:
