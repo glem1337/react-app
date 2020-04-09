@@ -1,33 +1,53 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
+import {Field, reduxForm, reset} from "redux-form";
+import {Input, Textarea} from "../../common/FormControls/FormControls";
+import {isRequired, maxLengthCreator} from "../../../utils/validators/validators";
 
 
-const MyPosts = (props) => {
+const maxLength = maxLengthCreator(10);
 
-    const postElements = props.profilePage.posts
-        .map((post, index) => <Post key={index} likes={post.likes} text={post.text} />)
-
-
-    let addPost = () => {
-        props.addPost();
-    }
-
-    let onChangeTextarea = (e) => {
-        let newText = e.target.value;
-        props.updateNewPostText(newText);
-    }
-
+const PostForm = (props) => {
     return (
-        <div className={s.mypost}>
-            <strong>My post</strong>
-            <textarea onChange={onChangeTextarea} value={props.profilePage.newPostText} cols="30" rows="10" />
-            <button onClick={addPost} >add post</button>
-            <div className={s.posts}>
-                {postElements}
+        <form onSubmit={props.handleSubmit}>
+            <Field placeholder={"New post text..."}
+                   validate={[isRequired, maxLength]}
+                   name={"post"} component={Textarea}/>
+            <button>add post</button>
+        </form>
+    )
+};
+
+const resetForm = (result, dispatch) =>
+    dispatch(reset('post'));
+
+const PostReduxForm = reduxForm({
+    form: 'post',
+    onSubmitSuccess: resetForm,
+})(PostForm)
+
+
+class MyPosts extends React.Component {
+
+    onSubmit = values => {
+        this.props.addPost(values.post);
+    }
+
+
+    render() {
+        const postElements = this.props.profilePage.posts
+            .map((post, index) => <Post key={index} likes={post.likes} text={post.text}/>)
+        return (
+            <div className={s.mypost}>
+                <strong>My post</strong>
+                <PostReduxForm onSubmit={this.onSubmit}/>
+                <div className={s.posts}>
+                    {postElements}
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default MyPosts;

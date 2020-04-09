@@ -1,4 +1,3 @@
-const UPDATE_MESSAGE_TEXT = 'UPDATE_MESSAGE_TEXT';
 const ADD_MESSAGE = 'ADD_MESSAGE';
 
 const initialState = {
@@ -9,7 +8,6 @@ const initialState = {
         { text: "Message 4" },
         { text: "Message 5" },
     ],
-    newMessageText: 'NewMessageText',
     dialogs: [
         { id: 1, name: "UserName1", ava: 'https://akm-img-a-in.tosshub.com/indiatoday/images/story/201907/imgonline-com-ua-FrameBlurred-_14-770x433.jpeg', },
         { id: 2, name: "UserName2", ava: 'https://akm-img-a-in.tosshub.com/indiatoday/images/story/201907/imgonline-com-ua-FrameBlurred-_14-770x433.jpeg', },
@@ -25,19 +23,13 @@ const dialogsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 newMessageText: '',
-                messages: [...state.messages, { likes: 0, text: state.newMessageText }]
-            }
-        case UPDATE_MESSAGE_TEXT:
-            return {
-                ...state,
-                newMessageText: action.text,
+                messages: [...state.messages, { likes: 0, text: action.text }]
             }
         default:
             return state;
     }
 }
 
-export const updateNewMessageText = (text) => ({ type: UPDATE_MESSAGE_TEXT, text: text });
-export const addMessage = () => ({ type: ADD_MESSAGE });
+export const addMessage = (text) => ({ type: ADD_MESSAGE, text });
 
 export default dialogsReducer;
