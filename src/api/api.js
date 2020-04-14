@@ -43,6 +43,14 @@ export class authApi {
             });
     }
 
+    static login(email, password, rememberMe = false, captcha = false) {
+        return instance.post(`/auth/login`, {email, password, rememberMe, captcha});
+    }
+
+    static logout() {
+        return instance.delete(`/auth/login`);
+    }
+
     static getProfile(userId) {
         console.warn('Obsolete method. Please use profileApi.getProfile()');
         return profileApi.getProfile(userId);
