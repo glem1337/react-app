@@ -13,6 +13,9 @@ const LoginForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
+                {props.error}
+            </div>
+            <div>
                 <Field placeholder={"Email"}
                        validate={[isRequired, maxLength, minLength]}
                        name={"email"} component={Input}/>
@@ -37,6 +40,7 @@ const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
 class Login extends React.Component {
 
     onSubmit = values => {
+        console.log(values);
         this.props.login(values.email, values.password, values.rememberMe);
     }
 

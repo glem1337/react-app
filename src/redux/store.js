@@ -1,3 +1,7 @@
+/**
+ * For remove
+ */
+
 import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
 import navbarReducer from "./navbar-reducer";

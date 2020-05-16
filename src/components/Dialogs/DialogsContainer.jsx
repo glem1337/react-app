@@ -13,4 +13,4 @@ const mapDispatchToProps = {
     addMessage
 };
 
-export default compose(connect(mapStateToProps, mapDispatchToProps))(Dialogs);
+export default compose(connect(mapStateToProps, mapDispatchToProps), withAuthRedirect)(Dialogs);
