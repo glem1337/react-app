@@ -1,10 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Users from './Users';
-import {getUsers, unfollowThunk, followThunk} from '../../redux/users-reducer';
+import {getUsers, unfollowThunk, followThunk} from '../../redux/users/users-reducer';
 import Preloader from '../common/Preloader/Preloader';
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import usersSelectors from '../../redux/users/users-selectors'
 
 class UsersContainer extends React.Component {
 
@@ -37,7 +38,12 @@ class UsersContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    ...state.usersPage
+    users: usersSelectors.getUsers(state),
+    pageSize: usersSelectors.getPageSize(state),
+    totalUsersCount: usersSelectors.getTotalUsersCount(state),
+    currentPage: usersSelectors.getCurrentPage(state),
+    isFetching: usersSelectors.getIsFetching(state),
+    followingInProgress: usersSelectors.getFollowingInProgress(state)
 });
 
 const mapDispatchToProps = {
