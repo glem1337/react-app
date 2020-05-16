@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Profile from './Profile';
-import {setProfileThunk, getStatusThunk, updateStatusThunk} from '../../redux/profile-reducer';
+import {getStatusThunk, setProfileThunk, updateStatusThunk} from '../../redux/profile-reducer';
 import Preloader from '../common/Preloader/Preloader';
 import {withRouter} from 'react-router-dom';
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
@@ -23,11 +23,10 @@ class ProfileContainer extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-            if (this.props.match.params.userId !== prevProps.profile?.userId) {
-                this.setProfile();
-            }
+        if (this.props.match.params.userId !== prevProps.match.params.userId) {
+            this.setProfile();
+        }
     }
-
 
     render() {
         {
