@@ -30,8 +30,7 @@ class App extends Component {
                 <HeaderContainer/>
                 <Navbar/>
                 <div className="app-wrapper__content">
-                    <Route path="/" exact render={() => <ProfileContainer/>}/>
-                    <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
+                    <Route exact path={['/', '/profile/:userId?']} render={() => <ProfileContainer/>}/>
                     <Route path="/dialogs" render={() => <DialogsContainer/>}/>
                     <Route path="/users" render={() => <UsersContainer/>}/>
                     <Route path="/news" component={News}/>

@@ -10,6 +10,10 @@ import {compose} from "redux";
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
+        this.setProfile();
+    }
+
+    setProfile() {
         let userId = this.props.match.params.userId;
         if (!userId) {
             userId = this.props.authUserId;
@@ -18,12 +22,21 @@ class ProfileContainer extends React.Component {
         this.props.getStatusThunk(userId);
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.profile) {
+            if (this.props.match.params.userId !== prevProps.profile.userId) {
+                this.setProfile();
+            }
+        }
+    }
+
 
     render() {
         {
             if (!this.props.profile) return <Preloader/>
         }
-        return <Profile profile={this.props.profile} status={this.props.status} updateStatusThunk={this.props.updateStatusThunk} />
+        return <Profile profile={this.props.profile} status={this.props.status}
+                        updateStatusThunk={this.props.updateStatusThunk}/>
     }
 
 }
@@ -35,4 +48,8 @@ const mapStateToProps = (state) => ({
 });
 
 
-export default compose(connect(mapStateToProps, {setProfileThunk, getStatusThunk, updateStatusThunk}), withRouter, withAuthRedirect)(ProfileContainer);
+export default compose(connect(mapStateToProps, {
+    setProfileThunk,
+    getStatusThunk,
+    updateStatusThunk
+}), withRouter, withAuthRedirect)(ProfileContainer);
