@@ -1,48 +1,32 @@
-import React from 'react';
-import s from './ProfileStatus.module.css';
+import React, {useEffect, useState} from "react";
+import s from "./ProfileStatus.module.css";
 
-class ProfileStatus extends React.Component {
+const ProfileStatus = ({updateStatus, ...props}) => {
 
-    state = {
-        editMode: false,
-        status: this.props.status
-    }
+    const [editMode, setEditMode] = useState(false);
+    const [status, setStatus] = useState(props.status);
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.status !== this.props.status) {
-            this.setState({
-                status: this.props.status
-            });
-        }
-    }
-
-    activateEditMode = () => {
-        this.setState({
-            editMode: true
-        });
+    const activateEditMode = () => setEditMode(true);
+    const deactivateEditMode = () => {
+        setEditMode(false);
+        updateStatus(status);
     };
 
-    deactivateEditMode = () => {
-        this.setState({
-            editMode: false
-        });
-        this.props.updateStatusThunk(this.state.status);
-    };
+    useEffect(() => {
+        setStatus(props.status)
+    }, [props.status]);
 
-    onStatusChange = (e) => {
-        this.setState({
-            status: e.currentTarget.value
-        });
-    }
+    const onStatusChange = e => setStatus(e.currentTarget.value);
 
-    render() {
-        return <div>
-            status: {(this.state.editMode) ?
-            <input onChange={this.onStatusChange} autoFocus={true} onBlur={this.deactivateEditMode}
-                   value={this.state.status}/> :
-            <span className={s.edit} onDoubleClick={this.activateEditMode}>{this.props.status}</span>}
+    return (
+        <div>
+            status: {(editMode) ?
+            <input onChange={onStatusChange} autoFocus={true} onBlur={deactivateEditMode}
+                   value={status}/> :
+            <span className={s.edit} onDoubleClick={activateEditMode}>{status}</span>}
         </div>
-    }
-}
+    );
+
+};
 
 export default ProfileStatus;
